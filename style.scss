@@ -1,0 +1,279 @@
+// 🎨 Color Palette
+$color-bg: #f8faff;
+$color-card: #ffffff;
+
+$primary: #6c63ff;
+$secondary: #a78bfa;
+
+$primary-soft: #e0e7ff;
+$success: #22c55e;
+$success-soft: #dcfce7;
+
+$warning: #f59e0b;
+$warning-soft: #fef3c7;
+
+$danger: #ef4444;
+$danger-soft: #fee2e2;
+
+// 🌟 Mixins
+@mixin card($bg, $color: #000) {
+  background: $bg;
+  color: $color;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin soft-button {
+  border: none;
+  border-radius: 1rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// 🌍 Global
+body {
+  background: $color-bg;
+  font-family: "Segoe UI", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  color: #333;
+}
+
+// Sidebar
+.sidebar {
+  width: 240px;
+  background: linear-gradient(160deg, $primary, $secondary);
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    margin: 0.5rem 0;
+    padding: 0.7rem 1rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.3s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+// Main
+.main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+// Navbar
+.navbar-custom {
+  @include card(white);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .avatar {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+    .username {
+      font-weight: 600;
+    }
+  }
+}
+
+// Stats
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  .stat-card {
+    @include card($color-card);
+
+    &.total {
+      background: $primary-soft;
+      color: $primary;
+    }
+    &.completed {
+      background: $success-soft;
+      color: $success;
+    }
+    &.pending {
+      background: $warning-soft;
+      color: $warning;
+    }
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+}
+
+// 🌟 Progress Bar
+.progress-container {
+  margin: 1rem 0 2rem;
+  height: 20px;
+  border-radius: 9999px;
+  background: $primary-soft;
+  overflow: hidden;
+  position: relative;
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, $primary, $secondary);
+    transition: width 0.5s ease;
+  }
+
+  .progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $primary;
+  }
+}
+
+// Todo Section
+.todo-section {
+  @include card(white);
+
+  .todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    button {
+      @include soft-button;
+      background: $primary;
+      color: white;
+    }
+  }
+
+  .todo-list {
+    .todo-item {
+      @include card($color-card);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .todo-actions {
+        button {
+          border: none;
+          background: transparent;
+          margin-left: 0.5rem;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: 0.2s;
+
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+    }
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Daftar warna soft untuk todo item
+$todo-colors: (
+  #e0f7fa,
+  // soft cyan
+  #fce4ec,
+  // soft pink
+  #ede7f6,
+  // soft purple
+  #fff9c4,
+  // soft yellow
+  #e8f5e9,
+  // soft green
+  #f3e5f5,
+  // soft violet
+  #fbe9e7,
+  // soft peach
+  #e1f5fe // soft blue
+);
+
+.todo-item {
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+
+  &.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+}
